@@ -22,11 +22,11 @@ namespace NetworkProgramming
                 IPCalculator calculator = new IPCalculator(ipAddress, subnetMask);
 
                 // Получение адреса сети.
-                IPAddress networkAddress = calculator.GetNetworkAddress(); 
+                IPAddress networkAddress = calculator.GetNetworkAddress();
                 // Получение широковещательного адреса.
-                IPAddress broadcastAddress = calculator.GetBroadcastAddress(); 
+                IPAddress broadcastAddress = calculator.GetBroadcastAddress();
                 // Вычисление макс. кол-ва хостов.
-                uint maxHosts = calculator.GetMaxNumberOfHosts(); 
+                uint maxHosts = calculator.GetMaxNumberOfHosts();
 
                 Console.WriteLine($"Адрес сети: {networkAddress}");
                 Console.WriteLine($"Широковещательный адрес: {broadcastAddress}");
@@ -36,6 +36,13 @@ namespace NetworkProgramming
             {
                 Console.WriteLine($"Ошибка: {ex.Message}");
             }
+            /*
+             * IP-адрес: 192.168.0.1
+               Маска: 255.255.255.0
+               Адрес сети: 192.168.0.0
+               Широковещательный адрес: 192.168.0.255
+               Максимальное количество IP-адресов: 254
+             */
         }
     }
 }
