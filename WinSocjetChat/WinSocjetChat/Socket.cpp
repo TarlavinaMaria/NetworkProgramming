@@ -1,5 +1,6 @@
 #include "Socket.h"
 
+
 Socket::Socket()
 {
 
@@ -19,6 +20,10 @@ Socket::Socket()
 		exit(11);
 	}
 }
+Socket::Socket(string username):Socket()
+{
+	this->username = username;
+}
 Socket::~Socket()
 {
 	WSACleanup();
@@ -37,15 +42,21 @@ bool Socket::ReceiveData(char* buffer, int size)
 
 void Socket::CloseConnection()
 {
+	cout << "Connection closing....." << endl;
 	closesocket(_socket);
 }
 
-void Socket::SendDataMessage()
+CONST CHAR* Socket::SendDataMessage()
 {
 	CHAR message[MAXSTRLEN]{};
+	CHAR buffer[MAXSTRLEN]{};
+	ZeroMemory(message, sizeof(message));
+	ZeroMemory(buffer, sizeof(message));
 	cout << "Enter message:";
 	cin.ignore();
-	cin.get(message, MAXSTRLEN);
+	cin.get(buffer, MAXSTRLEN);
+	sprintf(message, "%s: %s", username.c_str(), buffer);
 	SendData(message);
+	return message;
 }
 
